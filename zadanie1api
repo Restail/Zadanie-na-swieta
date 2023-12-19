@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    body{
+        background-color: cadetblue;
+    }
+#pierszy{
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <script>
+        function load(){
+            return fetch ('https://picsum.photos/seed/picsum/200/300/seed')
+            .then (res =>{
+            if (res.ok){
+                return res.json();
+            }
+            else {
+                return Promise.reject(`Http error: ${res.status}`);
+            }
+            })
+        }
+
+        load().
+        then(res => {
+            console.log(res);
+            console.log("działa");
+        })
+
+    </script>
+
+<section id="pierszy">
+    <form>
+    <h1>Zdjecia zwierząt</h1>
+    <button type="submit" id="zatwierdz">zatwierdź</button>
+    <input type="number" name="Pierwsza" id="1">
+    </form>
+</section>
+</body>
+</html>
