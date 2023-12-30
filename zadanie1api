@@ -124,3 +124,95 @@ img{
 </section>
 </body>
 </html>
+
+
+==================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    body {
+        background-color: cadetblue;
+    }
+    h1 {
+        color: whitesmoke;
+        text-decoration: darkcyan;
+    }
+    button {
+        width: 220px;
+        height: 40px;
+        border: 5px black dashed;
+        border-radius: 20px;
+        background-color: aquamarine;
+    }
+    button:hover {
+        border: 5px black dotted;
+        background-color: aqua;
+    }
+    #pierszy {
+        text-align: center;
+    }
+    img {
+        border-radius: 7px;
+        border: turquoise;
+        border-style: inset;
+    }
+</style>
+</head>
+<body>
+    <br>
+    <br>
+    <script>
+        function load(imageId) {
+            return fetch(`https://picsum.photos/id/${imageId}/200/300`)
+                .then(res => {
+                    if (res.ok) {
+                        return res.url;
+                    } else {
+                        return Promise.reject(`Http error: ${res.status}`);
+                    }
+                });
+        }
+
+        function displayImage() {
+            const imageId = document.getElementById('imageId').value;
+            if (imageId) {
+                load(imageId)
+                    .then(url => {
+                        console.log("działa");
+                        // Zaktualizuj źródło obrazu na podstawie uzyskanego URL
+                        document.getElementById('selectedImage').src = url;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        }
+    </script>
+
+    <section id="pierszy">
+        <form>
+            <h1>Zdjęcia na podstawie ID</h1>
+
+            <br>
+            <!-- Dodaj pole tekstowe dla ID obrazu -->
+            <label for="imageId">ID obrazu:</label>
+            <input type="text" id="imageId" name="imageId">
+            <br>
+
+            <!-- Zmodyfikuj ID obrazu na "selectedImage" -->
+            <img id="selectedImage" src="https://picsum.photos/200/300"> <br>
+
+            <!-- Zmień type przycisku na button i dodaj obsługę zdarzenia onclick -->
+            <button type="button" id="zatwierdz" onclick="displayImage()">Zatwierdź</button>
+            <p name="test" id="zdjecie"></p>
+        </form>
+    </section>
+</body>
+</html>
